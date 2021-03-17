@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product</title>
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="bg-dark text-light">
+    <div class="container col-lg-6 col-12">
+      <h1>{{product.name}}</h1>
+      {% if messages %} {% for message in messages %}
+      <div class="alert alert-warning">{{message.message}}</div>
+      {% endfor %} {% endif %}
+      <form action="/edit-product/{{product.id}}" method="POST">
+        {% csrf_token %}
+        <label for="manufacturer">Manufacturer/Brand</label>
+        <select
+          name="manufacturer"
+          id="manufacturer"
+          class="form-control text-primary bg-transparent"
+        >
+          <option value="{{product.manufacturer}}" default="true">
+            {{product.manufacturer}}
+          </option>
+          <option value="Manufacturer 1">Manufacturer 1</option>
+          <option value="Manufacturer 2">Manufacturer 2</option>
+          <option value="Manufacturer 3">Manufacturer 3</option>
+          <option value="Manufacturer 4">Manufacturer 4</option>
+          <option value="Manufacturer 5">Manufacturer 5</option>
+        </select>
+        <label for="name">Product Name</label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          class="form-control bg-transparent text-light"
+          value="{{product.name}}"
+        />
+        <label for="price">Price ($)</label>
+        <input
+          type="number"
+          name="price"
+          id="price"
+          step=".01"
+          class="form-control bg-transparent text-light"
+          value="{{product.price}}"
+        />
+        <label for="description">Description</label>
+        <textarea
+          name="description"
+          style="resize: none"
+          class="form-control bg-transparent text-light"
+          id="description"
+          cols="30"
+          rows="10"
+        >
+  {{product.description}}</textarea
+        >
+        <input
+          type="submit"
+          value="Update"
+          class="btn btn-outline-success mt-2"
+        />
+      </form>
+      <a href="/">Go Back</a>
+    </div>
+  </body>
+</html>
